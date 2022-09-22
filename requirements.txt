@@ -5,3 +5,4 @@ counterfit-shims-grove
 pytest
 pylint
 flake8
+black
