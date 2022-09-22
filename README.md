@@ -8,8 +8,10 @@
       - [Pull Requests](#pull-requests)
 
 ## How we work
+
 - Sprints and standups weekly or bi-weekly to discuss progress or any blockers
 - Log of initial allocation of work
+- 
 
 ### Pull Requests
 
