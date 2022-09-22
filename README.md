@@ -11,7 +11,8 @@
 
 - Sprints and standups weekly or bi-weekly to discuss progress or any blockers
 - Log of initial allocation of work
-- 
+- Project will be split up into phases to decide internal deadlines and to allocate tasks
+- A DevOps approach of continuous and iterative delivery will be followed for each phase
 
 ### Pull Requests
 
