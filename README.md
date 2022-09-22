@@ -8,6 +8,8 @@
       - [Pull Requests](#pull-requests)
 
 ## How we work
+- Master branch will be locked for merge requests until peer-reviewed
+- Changes should be made in individual branches and then pushed to master 
 
 ### Pull Requests
 
@@ -25,3 +27,6 @@ Include:
  - Issue number
  - Summary of changes
  - How tested (in brief)
+
+
+### 
