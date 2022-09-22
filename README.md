@@ -8,8 +8,8 @@
       - [Pull Requests](#pull-requests)
 
 ## How we work
-- Master branch will be locked for merge requests until peer-reviewed
-- Changes should be made in individual branches and then pushed to master 
+- Sprints and standups weekly or bi-weekly to discuss progress or any blockers
+-  
 
 ### Pull Requests
 
