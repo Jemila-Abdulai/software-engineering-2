@@ -2,4 +2,6 @@
 
 cd dashboard && npm run test
 
-# TODO - add more tests here
+cd sensors
+python -m flake8
+python -m pytest
