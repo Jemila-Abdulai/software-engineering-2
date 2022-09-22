@@ -1,0 +1,20 @@
+{
+  "name": "software-engineering-2",
+  "version": "1.0.0",
+  "description": "- [software-engineering-2](#software-engineering-2)\r   - [TOC](#toc)\r     - [How we work](#how-we-work)\r       - [Pull Requests](#pull-requests)",
+  "main": "index.js",
+  "scripts": {
+    "install": "npm run python-install && npm run dashboard-install",
+    "python-install": "python -m pip install -r requirements.txt",
+    "dashboard-install": "cd dashboard && npm install",
+    "python-lint": "python -m flake8",
+    "python-test": "npm run python-lint && python -m pytest",
+    "dashboard-test": "cd dashboard && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-ashketchupppp:Jemila-Abdulai/software-engineering-2.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -14,7 +14,33 @@
 - Project will be split up into phases to decide internal deadlines and to allocate tasks
 - A DevOps approach of continuous and iterative delivery will be followed for each phase
 
-### Pull Requests
+### Repository map
+```
+/Backend/CounterFit - Desc. TODO
+/Backend/soil-moisture-sensor - Python application, simulates an IoT sensor
+/dashboard - React application, dashboard to monitor the 
+```
+
+### Contributing
+
+#### Environment and Initial setup
+You will need `nodejs` 16 installed, found here https://nodejs.org/en/
+You will also need `python` 3.10 installed, found here https://www.python.org/downloads/
+
+To install the python dependencies you will need to run
+```
+python -m pip install -r requirements.txt
+```
+
+To install the nodejs dependencies you will need to run
+```
+npm install
+```
+
+#### Testing
+
+
+#### Pull Requests
 
 To commit code, we will operate a branch and PR system. 
 
@@ -24,13 +50,10 @@ To commit code, we will operate a branch and PR system.
  - Create a PR
  - Seek someone to review
 
-### In your Pull Request
+#### In your Pull Request
 
 Include:
  - Issue number
  - Summary of changes
  - How tested (in brief)
 
-
-### How to test code
-- Use Pytest
