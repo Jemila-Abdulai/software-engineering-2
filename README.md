@@ -1,5 +1,7 @@
 # software-engineering-2
 
+This repository is a _monorepo_ containing all the code for Software Engineering 2 module.
+
 # TOC
 
   - [software-engineering-2](#software-engineering-2)
@@ -14,47 +16,7 @@
 - Project will be split up into phases to decide internal deadlines and to allocate tasks
 - A DevOps approach of continuous and iterative delivery will be followed for each phase
 
-### Contributing
-
-#### Environment and Initial setup
-You will need `nodejs` 16 installed, found here https://nodejs.org/en/
-You will also need `python` 3.10 installed, found here https://www.python.org/downloads/
-
-To install the python dependencies you will need to run
-```
-python -m pip install -r requirements.txt
-```
-
-To install the nodejs dependencies you will need to run
-```
-npm install
-```
-
-If you use VSCode, there are some recommended settings and extensions to speed up development:
- 1. (Python VSCode Extension)[https://marketplace.visualstudio.com/items?itemName=ms-python.python]
- 2. (ESLint VSCode Extension)[https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint] if you plan on making `nodejs` changes
- 3. Change your `Python > Formatting: Provider` to `black`
- 4. Set `Editor: Format on Save` to true, so that the Python formatting provider we just set will auto-format the file according to `black`'s formatting rules everytime you save
- 5. Set `Python > Linting: Flake8 Enabled` to true
-
-#### Repository map
- - `/sensors/CounterFit` - Desc. TODO
- - `/sensors/soil-moisture-sensor` - Python application, simulates an IoT sensor
- - `/dashboard` - React application, dashboard to monitor the sensors
- - `/scripts` - any utility scripts live here
-
-Due to our usage of NodeJS and React for the sensor dashboard, there is a `package.json` file at the root of this repository.
-The `package.json` allows you to define a number of named scripts for automation, run with `npm run <script-name>`. We use these to automate tasks which require multiple steps to speed up development.
-Although not all of these tasks are directly related to the dashboard, this automation tool is generally useful.
-
-#### Testing
-
-
-#### Deployment
-
-
-
-#### Pull Requests
+### Pull Requests
 
 To commit code, we will operate a branch and PR system. 
 
@@ -70,4 +32,87 @@ Include:
  - Issue number
  - Summary of changes
  - How tested (in brief)
+## Repository map
+This is a monorepo, a repository containing multiple different (but related) codebases
+
+ - `/sensors/CounterFit` - simulates an IoT sensor
+ - `/sensors/soil-moisture-sensor` - Python application, simulates an IoT sensor
+ - `/dashboard` - React application, dashboard to monitor the sensors
+ - `/util` - any utility scripts live here
+
+### Contributing
+
+There are a couple different source trees in this monorepo, each with their own specifics.
+
+#### Dashboard
+
+##### Setup
+You will need `nodejs` 16 installed, found here https://nodejs.org/en/
+
+FYI: All commands executed for the dashboard need to be run while under the `dashboard` directory. This is due to how `npm` detects the location of the `package.json` file. Since this is a `monorepo`, I thought it would be best to keep the source trees as separate as possible.
+
+To install the required dependencies, execute the following
+```
+npm install
+```
+
+The (ESLint VSCode Extension)[https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint] will be helpful if you plan on making `nodejs` changes
+
+##### Development
+To run the dashboard for development, you should run
+```
+npm run start:dev
+```
+
+This will start the backend server with `nodemon`, which will pick up file changes to the source tree and reload the server if they are made. This will also start a `webpack-dev-server`, which will do the same as `nodemon` but for the UI. The result is a running dashboard website whose code can be changed and without the need to manually reload the server.
+
+##### Testing
+To test the Dashboard, run
+```
+npm run test
+```
+
+This will automatically run the NodeJS `eslint` linter, you can run this separately with
+```
+npm run lint
+```
+
+##### Production
+Before the Dashboard can be run in production mode, a webpack build must be run with
+```
+npm run build
+```
+
+To start the production web server, run
+```
+npm run start
+```
+
+This will serve the UI frontend from the `dist` directory, statically.
+
+#### Sensors
+##### Setup
+You will also need `python` 3.10 installed, found here https://www.python.org/downloads/
+
+To install the python dependencies you will need to run
+```
+python -m pip install -r requirements.txt
+```
+
+If you use VSCode, there are some recommended settings and extensions to speed up development:
+ 1. (Python VSCode Extension)[https://marketplace.visualstudio.com/items?itemName=ms-python.python]
+ 3. Change your `Python > Formatting: Provider` to `black`
+ 4. Set `Editor: Format on Save` to true, so that the Python formatting provider we just set will auto-format the file according to `black`'s formatting rules everytime you save
+ 5. Set `Python > Linting: Flake8 Enabled` to true
+
+#### Testing
+
+ TODO
+
+### Deployment
+
+ TODO
+
+Talk about Kubernetes configuration here ...
+
 
