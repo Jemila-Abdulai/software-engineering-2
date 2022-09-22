@@ -10,6 +10,7 @@
 ## How we work
 
 - Weekly Thursday standups and bi-weekly sprints to discuss progress or any blockers
+- Sprint meetings will be used to review and retrospectives to discuss what went well, backlog  
 - Log of initial allocation of work
 - Project will be split up into phases to decide internal deadlines and to allocate tasks
 - A DevOps approach of continuous and iterative delivery will be followed for each phase
