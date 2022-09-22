@@ -19,3 +19,9 @@ To commit code, we will operate a branch and PR system.
  - Create a PR
  - Seek someone to review
 
+### In your Pull Request
+
+Include:
+ - Issue number
+ - Summary of changes
+ - How tested (in brief)
