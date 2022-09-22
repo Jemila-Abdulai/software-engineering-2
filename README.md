@@ -12,6 +12,7 @@ This repository is a _monorepo_ containing all the code for Software Engineering
 ## How we work
 
 - Weekly Thursday standups and bi-weekly sprints to discuss progress or any blockers
+- Sprint meetings will be used to review and retrospectives to discuss what went well, backlog,etc
 - Log of initial allocation of work
 - Project will be split up into phases to decide internal deadlines and to allocate tasks
 - A DevOps approach of continuous and iterative delivery will be followed for each phase
@@ -105,14 +106,22 @@ If you use VSCode, there are some recommended settings and extensions to speed u
  4. Set `Editor: Format on Save` to true, so that the Python formatting provider we just set will auto-format the file according to `black`'s formatting rules everytime you save
  5. Set `Python > Linting: Flake8 Enabled` to true
 
-#### Testing
+#### Testing and linting
+To test the sensors, run
+```
+cd sensors
+python -m pytest
+```
 
- TODO
+To lint the sensors, run
+```
+cd sensors
+python -m flake8
+```
 
 ### Deployment
 
  TODO
 
 Talk about Kubernetes configuration here ...
-
 
