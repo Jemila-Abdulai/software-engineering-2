@@ -4,8 +4,13 @@
 
   - [software-engineering-2](#software-engineering-2)
   - [TOC](#toc)
+    - [Assignment Brief](#assignment-brief)
     - [How we work](#how-we-work)
       - [Pull Requests](#pull-requests)
+
+## Assignment Brief
+
+[Click here for the assignment brief](https://vle.exeter.ac.uk/pluginfile.php/3353859/mod_resource/content/0/ECM3440%20Assessment%202022.pdf)
 
 ## How we work
 
