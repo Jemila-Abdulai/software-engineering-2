@@ -8,7 +8,8 @@ import json
 from azure.iot.device import IoTHubDeviceClient, Message, MethodResponse
 
 #connection_string = 'HostName=azure-software-engineering-iot-hub.azure-devices.net;DeviceId=soil-moisture-sensor;SharedAccessKey=Tzx2I5OC3U5weQPVM7ZDskkFYxaqK7Z6VG/8JNumVoY='
-connection_string = "HostName=StubHub1.azure-devices.net;DeviceId=soil-moisture-sensor;SharedAccessKey=5nmlmsFUQErXJ505PgJyzZuR3ZPRwuTK4dR7j9kvLf8="
+connection_string = "HostName=StubHub1.azure-devices.net;DeviceId=soil-moisture-sensor;SharedAccessKey=5nmlmsFUQErXJ505PgJyzZuR3ZPRwuTK4dR7j9kvLf8=" # SDR
+
 adc = ADC()
 relay = GroveRelay(5)
 
