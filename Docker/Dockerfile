@@ -3,8 +3,8 @@ FROM python:latest
 RUN apt-get update -y
 #RUN mkdir /opt/app
 #COPY ../Backend/soil-moisture-sensor/requirements.txt /opt/app
-#COPY ../Backend/soil-moisture-sensor/app.py /opt/app
-ENTRYPOINT [ "/bin/sh" ]
+COPY ./Backend/ /opt/Backend
+ENTRYPOINT [ "/bin/bash" ]
 
 ## A note
 
