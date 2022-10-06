@@ -6,8 +6,6 @@ RUN apt-get update -y
 COPY ./Backend/ /opt/Backend
 ENTRYPOINT [ "/bin/bash" ]
 
-# Change to force dirname change
-
 ## A note
 
 # Currently, this is going to give us a decent container with Python on Ubuntu. 
