@@ -7,8 +7,8 @@ from counterfit_shims_grove.grove_relay import GroveRelay
 import json
 from azure.iot.device import IoTHubDeviceClient, Message, MethodResponse
 
-connection_string = 'HostName=azure-software-engineering-iot-hub.azure-devices.net;DeviceId=soil-moisture-sensor;SharedAccessKey=Tzx2I5OC3U5weQPVM7ZDskkFYxaqK7Z6VG/8JNumVoY='
-
+#connection_string = 'HostName=azure-software-engineering-iot-hub.azure-devices.net;DeviceId=soil-moisture-sensor;SharedAccessKey=Tzx2I5OC3U5weQPVM7ZDskkFYxaqK7Z6VG/8JNumVoY='
+connection_string = "HostName=StubHub1.azure-devices.net;DeviceId=soil-moisture-sensor;SharedAccessKey=5nmlmsFUQErXJ505PgJyzZuR3ZPRwuTK4dR7j9kvLf8="
 adc = ADC()
 relay = GroveRelay(5)
 
@@ -32,10 +32,13 @@ def handle_method_request(request):
 device_client.on_method_request_received = handle_method_request
 
 while True:
-    soil_moisture = adc.read(0)
-    print("Soil moisture:", soil_moisture)
+    try:
+      soil_moisture = adc.read(0)
+      print("Soil moisture:", soil_moisture)
 
-    message = Message(json.dumps({ 'soil_moisture': soil_moisture }))
-    device_client.send_message(message)
-
-    time.sleep(10)
+      message = Message(json.dumps({ 'soil_moisture': soil_moisture }))
+      device_client.send_message(message)
+      time.sleep(10)
+    except Exception as e:
+      print("CounterFit.counterfit is not running - please issue \n  python3 Counterfit.counterfit \n... on the command line")
+      time.sleep(5)

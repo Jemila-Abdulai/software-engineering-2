@@ -6,16 +6,25 @@ This repository is a _monorepo_ containing all the code for Software Engineering
 
   - [software-engineering-2](#software-engineering-2)
   - [TOC](#toc)
+    - [Assignment Brief](#assignment-brief)
     - [How we work](#how-we-work)
       - [Pull Requests](#pull-requests)
 
+## Assignment Brief
+
+[Click here for the assignment brief](https://vle.exeter.ac.uk/pluginfile.php/3353859/mod_resource/content/0/ECM3440%20Assessment%202022.pdf)
+
 ## How we work
 
-- Weekly Thursday standups and bi-weekly sprints to discuss progress or any blockers
-- Sprint meetings will be used to review and retrospectives to discuss what went well, backlog,etc
-- Log of initial allocation of work
-- Project will be split up into phases to decide internal deadlines and to allocate tasks
-- A DevOps approach of continuous and iterative delivery will be followed for each phase
+ - Weekly Thursday standups and bi-weekly sprints to discuss progress or any blockers
+ - Sprint meetings will be used to review and retrospectives to discuss what went well, backlog,etc
+ - Log of initial allocation of work
+ - Project will be split up into phases to decide internal deadlines and to allocate tasks
+ - A DevOps approach of continuous and iterative delivery will be followed for each phase
+
+### Code Conventions
+ - 2 space tabs for python code
+ - Else, follow PEP8 conventions
 
 ### Pull Requests
 
