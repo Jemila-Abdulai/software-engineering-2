@@ -1,14 +1,14 @@
 FROM ubuntu:latest
 FROM python:latest
 RUN apt-get update -y
-#RUN mkdir /opt/app
-#COPY ../Backend/soil-moisture-sensor/requirements.txt /opt/app
-COPY ./Backend/ /opt/Backend
-ENTRYPOINT [ "/bin/bash" ]
+COPY ./sensors/ /opt/sensors
+COPY ./dashboard /opt/dashboard
+COPY ./util /opt/util
+RUN ["pip", "install", "Counterfit"]
+RUN ["pip", "install", "counterfit_connection"]
+CMD ["python", "/opt/util/waiting.py"]
 
-## A note
+# No longer needed but want to keep as 
+# part of my notes for now:
+#ENTRYPOINT [ "/bin/bash" ]
 
-# Currently, this is going to give us a decent container with Python on Ubuntu. 
-# If we want our app to be in it we may need to change the dir structure so that everything is within the Docker folder. 
-# This is due to how Dockerfiles work (everything needs to be inside the same dir)
-# Another way is to copy the files we want in some way from outside to within the Docker dir. 
