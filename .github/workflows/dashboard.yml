@@ -28,6 +28,3 @@ jobs:
     - name: Lint and test
       run: |
         npm run test
-    - name: Fetch
-      run: | 
-        npm install node-fetch
