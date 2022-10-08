@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import fetch from "node-fetch";
 
 // The best way to write React applications is to split your App into separate components.
 // I would recommend reading this https://reactjs.org/tutorial/tutorial.html#overview
