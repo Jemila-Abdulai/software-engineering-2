@@ -7,7 +7,7 @@ on pin 1.
 Uncomment the relevant test below and run it to see the relay change state
 
 '''
-pylint: disable=redefined-outer-name,unused-argument
+# pylint: disable=redefined-outer-name,unused-argument
 
 import pytest
 
@@ -21,12 +21,12 @@ def init_counterfit_device():
     '''
     CounterFitConnection.init('127.0.0.1', 5000)
 
-def test_turn_relay_on(init_counterfit_device):
-    '''
-    Tests the on method of the Grove relay shim
-    '''
-    sensor = GroveRelay(1)
-    sensor.on()
+# def test_turn_relay_on(init_counterfit_device):
+#     '''
+#     Tests the on method of the Grove relay shim
+#     '''
+#     sensor = GroveRelay(1)
+#     sensor.on()
 
 def test_turn_relay_off(init_counterfit_device):
     '''
