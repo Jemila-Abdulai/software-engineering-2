@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 FROM python:latest
 RUN apt-get update -y
-COPY ./sensors/ /opt/sensors
+#COPY ./sensors/ /opt/sensors  # Leave commented unless we later want this in the container
 COPY ./dashboard /opt/dashboard
 COPY ./util /opt/util
 RUN ["pip", "install", "Counterfit"]
