@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 // This uses Enzyme to render our React components and it puts them in a nice wrapper
 // to make testing them easy
 
-import App from '../src/frontend/components/App/App.jsx'
+import App from '../src/components/App/App.jsx'
 
 Enzyme.configure({ adapter: new Adapter() });
 
