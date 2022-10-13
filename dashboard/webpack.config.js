@@ -1,6 +1,5 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require("path")
 
 // Webpack compiles our React code
 // We use webpack-dev-server to hot-reaload our code so we don't have to
@@ -42,7 +41,7 @@ module.exports = {
       },
       {
         test: /\.(sass|less|css)$/,
-        use: [ MiniCssExtractPlugin.loader, 'style-loader', 'less-loader']
+        use: [ 'style-loader', 'less-loader']
       },
       {
         test: /\.png$/,
@@ -57,8 +56,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: __dirname + "/public/index.html",
       filename: "index.html"
-    }),
-    new MiniCssExtractPlugin()
+    })
   ],
   mode: "development",
   devtool: 'inline-source-map',

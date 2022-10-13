@@ -3,7 +3,6 @@
 import React, { StrictMode } from "react"
 import ReactDOM from "react-dom"
 import 'regenerator-runtime'
-//import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './components/App/App.jsx'
 

@@ -15,10 +15,6 @@ app.use(express.json())
 // Serve the build
 app.use('/', express.static(path.join(root, 'dist')))
 
-app.get('/api/hello', (req, res) => {
-  res.json('Hello World!')
-})
-
 app.get('/api/devices', (req, res) => {
   res.json(mock_data)
 })
