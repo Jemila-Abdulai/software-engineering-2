@@ -1,0 +1,12 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "rules": {
+    "semi": [2, "never"]
+  },
+  "env": {
+    "node": true,
+    "jest": true,
+    "es6": true
+  },
+  "parser": "@babel/eslint-parser"
+}

@@ -11,10 +11,10 @@ import App from './components/App/App.jsx'
 // public/index.html must have a div with the class "root" in it for this to work
 // ReactDOM.render takes the div and uses all the react magic to render
 // your React application inside the div
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById("root")
 ReactDOM.render(
   <StrictMode>
     <App />
-  </StrictMode>,
+  </StrictMode >,
   rootElement
-);
+)

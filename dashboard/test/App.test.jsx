@@ -15,7 +15,7 @@ export const sleep = milliseconds => new Promise(resolve => {
 
 describe('App', () => {
     beforeEach(() => {
-        fetch.resetMocks();
+        fetch.resetMocks()
     })
 
     test('renders a card for each sensor', async () => {
