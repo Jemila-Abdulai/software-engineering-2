@@ -1,19 +1,45 @@
-import React from "react";
-import Enzyme, { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16';
-
-// Good devs test their code :)
-// This uses Enzyme to render our React components and it puts them in a nice wrapper
-// to make testing them easy
+import React from "react"
+import Enzyme, { mount } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+import Card from 'react-bootstrap/Card'
 
 import App from '../src/components/App/App.jsx'
 
-Enzyme.configure({ adapter: new Adapter() });
+Enzyme.configure({ adapter: new Adapter() })
+
+export const sleep = milliseconds => new Promise(resolve => {
+    setTimeout(() => {
+        resolve()
+    }, milliseconds)
+})
 
 describe('App', () => {
-    test('displays a paragraph', () => {
-        const app = shallow(<App />)
-        const parahraph = app.find('p')
-        expect(parahraph).toHaveLength(1)
+    beforeEach(() => {
+        fetch.resetMocks()
+    })
+
+    test('renders a card for each sensor', async () => {
+        // getting enzyme to wait for an API call is a pain in the ass
+        const mockData = [
+            { id: 5673, device_name: 'soil_sensor_1', alive: true },
+            { id: 5612, device_name: 'soil_sensor_2', alive: true },
+            { id: 5243, device_name: 'soil_sensor_3', alive: false }
+        ]
+        fetch.mockResponse(async req => {
+            if (req.url.match('/api/devices')) {
+                return JSON.stringify(mockData)
+            }
+            throw Error(`Unexpected API call: ${req.url}`)
+        })
+        const mounted = mount(<App />)
+        expect(fetch.mock.calls).toEqual([
+            ['/api/devices']
+        ])
+
+        // this shouldn't be here, there is no other way
+        await sleep(10)
+
+        mounted.update()
+        expect(mounted.find(Card)).toHaveLength(mockData.length)
     })
 })
