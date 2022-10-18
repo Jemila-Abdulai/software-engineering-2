@@ -26,4 +26,5 @@ jobs:
         run: |
           npm run build
       - name: Build the Docker image
-        run: docker build .  --tag my-image-name:$(date +%s)
+        run: docker build . --tag samreece/sweng2-coursework:$(date +%s)
+
