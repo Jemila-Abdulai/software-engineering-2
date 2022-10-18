@@ -1,0 +1,29 @@
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploydocker:
+    defaults:
+      run:
+        shell: bash
+        working-directory: dashboard
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: |
+          npm install
+      - name: Lint and test
+        run: |
+          npm run test
+      - name: Build
+        run: |
+          npm run build
+      - name: Build the Docker image
+        run: docker build .  --tag my-image-name:$(date +%s)
