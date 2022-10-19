@@ -16,7 +16,6 @@ jobs:
         shell: bash
         working-directory: dashboard
     runs-on: ubuntu-latest
-#    dir:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
