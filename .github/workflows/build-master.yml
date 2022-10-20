@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 16
 
-      - uses: .github/workflows/dashboard.yml
+      - uses: ./.github/workflows/dashboard.yml
 
       - name: Install dependencies
         run: |
