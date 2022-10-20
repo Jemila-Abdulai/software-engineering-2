@@ -1,8 +1,10 @@
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "*" ]
 
 jobs:
+  test-dashboard:
+    uses: ./.github/workflows/dashboard.yml
   deploydocker:
     defaults:
       run:
@@ -19,9 +21,6 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-      - name: Lint and test
-        run: |
-          npm run test
       - name: Build
         run: |
           npm run build
