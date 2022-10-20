@@ -2,7 +2,8 @@ name: IOT Dashboard
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "*" ]
+    branches-ignore: [ "main" ]
   pull_request:
     branches: [ "main" ]
   workflow_call:
