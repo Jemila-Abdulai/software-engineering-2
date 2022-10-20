@@ -1,4 +1,6 @@
 .pytest_cache
 __pycache__
-dashboard/dist
 dashboard/node_modules
+node_modules
+dashboard/dist
+venv

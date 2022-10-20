@@ -1,5 +1,5 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require("path");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require("path")
 
 // Webpack compiles our React code
 // We use webpack-dev-server to hot-reaload our code so we don't have to
@@ -40,11 +40,8 @@ module.exports = {
         }
       },
       {
-        test:/\.css$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'css-loader'
-        }
+        test: /\.(sass|less|css)$/,
+        use: [ 'style-loader', 'less-loader']
       },
       {
         test: /\.png$/,
@@ -59,7 +56,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: __dirname + "/public/index.html",
       filename: "index.html"
-    }),
+    })
   ],
   mode: "development",
   devtool: 'inline-source-map',
