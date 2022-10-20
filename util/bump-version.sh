@@ -14,5 +14,5 @@ then
   cd $(dirname "$0")/../
 
   # bump the version
-  python -m bumpversion $2 --config-file VERSION.cfg --tag --commit
+  python -m bumpversion $1 --config-file VERSION.cfg --tag --commit
 fi
