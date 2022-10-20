@@ -1,0 +1,18 @@
+name: Changelog, Version and Git Tag bump
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  bump:
+    defaults:
+      run:
+        shell: bash
+        working-directory: dashboard
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: undergroundwires/bump-everywhere@master

@@ -16,14 +16,16 @@ jobs:
         with:
           node-version: 16
 
-      - uses: ./.github/workflows/dashboard.yml
+      - uses: Jemila-Abdulai/software-engineering-2/.github/workflows/dashboard.yml
 
       - name: Install dependencies
         run: |
           npm install
+
       - name: Build
         run: |
           npm run build
+
       - name: Build the Docker image
         run: docker build . --tag samreece/sweng2-coursework:$(date +%s)
 
