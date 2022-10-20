@@ -21,10 +21,12 @@ jobs:
           python-version: '3.10' 
 
       - name: Get repo version
-        run: set TAG=$(python ../util/what-version-are-we.py)
+        run: |
+          set TAG=$(python ../util/what-version-are-we.py)
+          echo TAG
 
       - name: Checking out most recent tag
-        run: git checkout tags/${{ env.TAG }}
+        run: git checkout tags/$TAG
 
       - name: Install dependencies
         run: npm install
@@ -36,5 +38,5 @@ jobs:
         run: npm run build
 
       - name: Build the Docker image
-        run: docker build . --tag samreece/sweng2-coursework:${{ env.TAG }}
+        run: docker build . --tag samreece/sweng2-coursework:$TAG
 
