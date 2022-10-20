@@ -3,7 +3,10 @@ on:
     branches: [ "*" ]
 
 jobs:
+  test-dashboard:
+    uses: ./.github/workflows/dashboard.yml
   deploydocker:
+    needs: test-dashboard
     defaults:
       run:
         shell: bash
@@ -15,8 +18,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-
-      - uses: ./.github/workflows/dashboard.yml
 
       - name: Install dependencies
         run: |
