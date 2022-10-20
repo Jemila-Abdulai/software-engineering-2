@@ -5,6 +5,6 @@ import os
 config = configparser.ConfigParser()
 repoRoot = os.path.join(os.path.realpath(__file__), "../")
 
-versionConfig = config.read(os.path.join("VERSION.cfg"))
+versionConfig = config.read(os.path.join(repoRoot, "VERSION.cfg"))
 
 print(config["bumpversion"]["current_version"], end="")
