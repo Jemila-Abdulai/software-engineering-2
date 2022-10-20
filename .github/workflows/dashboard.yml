@@ -5,6 +5,8 @@ on:
     branches-ignore: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_call:
+    inputs:
 
 permissions:
   contents: read
