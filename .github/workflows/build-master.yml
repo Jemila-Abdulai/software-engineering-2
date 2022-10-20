@@ -5,6 +5,8 @@ on:
 jobs:
   test-dashboard:
     uses: ./.github/workflows/dashboard.yml
+  v-bump:
+    uses: ./.github/workflows/v-bump.yml
   deploydocker:
     needs: test-dashboard
     defaults:
