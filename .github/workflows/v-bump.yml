@@ -16,3 +16,37 @@ jobs:
 
     steps:
       - uses: undergroundwires/bump-everywhere@master
+        with:
+          # Repository name with owner to bump & release. For example, undergroundwires/bump-everywhere
+          # (Optional) Default: ${{ github.repository  }}
+          repository: ${{ github.repository  }}
+
+          # Name of the user who will do the bump commit
+          # (Optional) Default: ${{ github.actor }}
+          user: ${{ github.actor }}
+
+          # Commit message that will be used in the bump commit
+          # (Optional) Default: ⬆️ bump everywhere to {{version}}
+          commit-message: 'bump to {{version}}'
+
+          # Personal access token (PAT) used to clone & push to the repository.
+          # If you use default, it'll not trigger other actions, but your own PAT then it triggers new actions
+          # (Optional) Default: ${{ github.token }}
+          git-token: ${{ github.token }}
+
+          # The type of the GitHub release
+          # Options: 'release' | 'prerelease' | 'draft' | 'none' (does not release)
+          # (Optional) Default: 'release'
+          release-type: 'release'
+
+          # Personal access token (PAT) used to release to GitHub.
+          # Used only if release-type is not "none"
+          # If you use default, it'll not trigger other actions, but your own PAT then it triggers new actions
+          # (Optional) Default: ${{ github.token }}
+          release-token: ${{ github.token }}
+
+          # Git branch to push the changes such as version tags, CHANGELOG file, version changes...
+          # Configuring this should not be needed for most use-cases.
+          # Use this only if you DO NOT use a single main default branch (e.g. `master` or `main`).
+          # (Optional) Default: Default "git clone" behavior. Checks out to default branch of remote.
+          branch: 'master'
