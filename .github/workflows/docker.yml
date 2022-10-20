@@ -1,6 +1,7 @@
 on:
   push:
-    branches: [ "*" ]
+    tags:
+      - '*'
 
 jobs:
   deploydocker:
@@ -15,16 +16,22 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+
+      - name: Checking out most recent tag
+        run: git checkout tags/$(python ../util/what-version-are-we.py)
 
       - name: Install dependencies
-        run: |
-          npm install
+        run: npm install
+
       - name: Lint and test
-        run: |
-          npm run test
+        run: npm run test
+
       - name: Build
-        run: |
-          npm run build
+        run: npm run build
+
       - name: Build the Docker image
-        run: docker build . --tag samreece/sweng2-coursework:$(date +%s)
+        run: docker build . --tag samreece/sweng2-coursework:$(python ../util/what-version-are-we.py)
 
