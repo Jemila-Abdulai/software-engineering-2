@@ -5,6 +5,20 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_call:
+    inputs:
+      checkout:
+        type: boolean
+        required: false
+        default: true
+      setup-node:
+        type: boolean
+        required: false
+        default: true
+      install-deps:
+        type: boolean
+        required: false
+        default: true
 
 permissions:
   contents: read
@@ -19,12 +33,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      if: ${{ inputs.checkout }}
+
     - uses: actions/setup-node@v3
       with:
         node-version: 16
+      if: ${{ inputs.setup-node }}
+
     - name: Install dependencies
+      if: ${{ inputs.install-deps }}
       run: |
         npm install
+
     - name: Lint and test
       run: |
         npm run test
