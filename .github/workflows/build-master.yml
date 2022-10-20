@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 16
 
-      - uses: Jemila-Abdulai/software-engineering-2/.github/workflows/dashboard.yml
+      - uses: .github/workflows/dashboard.yml
 
       - name: Install dependencies
         run: |
