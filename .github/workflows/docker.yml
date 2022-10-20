@@ -1,6 +1,6 @@
 on:
   push:
-    tags:
+    branches:
       - '*'
 
 jobs:
@@ -20,8 +20,11 @@ jobs:
         with:
           python-version: '3.10' 
 
+      - name: Get repo version
+        run: set TAG=$(python ../util/what-version-are-we.py)
+
       - name: Checking out most recent tag
-        run: git checkout tags/$(python ../util/what-version-are-we.py)
+        run: git checkout tags/${{ env.TAG }}
 
       - name: Install dependencies
         run: npm install
@@ -33,5 +36,5 @@ jobs:
         run: npm run build
 
       - name: Build the Docker image
-        run: docker build . --tag samreece/sweng2-coursework:$(date +%s)
+        run: docker build . --tag samreece/sweng2-coursework:${{ env.TAG }}
 
