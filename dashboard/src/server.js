@@ -3,7 +3,9 @@ require('dotenv').config()
 
 const path = require('path')
 const express = require('express')
-const iothub = require('azure-iothub')
+
+const routes = require('./server/routes.js')
+const azure = require('./server/azure.js')
 
 const inProd = !process.env.DEV
 
@@ -26,36 +28,23 @@ let devices = [
   { id: 'my-device1', alive: true },
   { id: 'my-device2', alive: false }
 ]
+let iothubRegistry
 
-if (!inProd) {
-  devices = [
-    { id: 'my-device1', alive: true },
-    { id: 'my-device2', alive: false }
-  ]
-} else {
-  const iothubRegistry = iothub.Registry.fromConnectionString(config.IOT_CONN_STR)
-  setInterval(async () => {
-    const res = await iothubRegistry.list()
-    devices = res.responseBody
-  }, 1000)
+if (inProd) {
+  devices = []
+  iothubRegistry = azure.connect(config.IOT_CONN_STR)
+  devices = azure.monitorDevices(iothubRegistry).devices
 }
 
 // Setup HTTP Server
 const app = express()
 app.use(express.json())
 
-const root = path.join(__dirname, '../', '../')
-app.use('/', express.static(path.join(root, 'dist')))
+// Serve webpage resources
+app.use('/', express.static(path.join(__dirname, '../', '../', 'dist')))
 
-app.get('/api/devices', (req, res) => {
-  const deviceList = devices.map(device => {
-    return {
-      id: device.deviceId,
-      alive: device.connectionState === 'Connected'
-    }
-  })
-  res.json(deviceList)
-})
+// Serve device routes
+app.use(routes.deviceRouter())
 
 app.listen(config.PORT, () => {
   console.log(`Example app listening on port ${config.PORT}`)
