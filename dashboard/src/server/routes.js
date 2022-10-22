@@ -1,15 +1,18 @@
 
 const express = require('express')
 
-let deviceList
+let deviceList = []
 
-const api_devices = (req, res) => {
-  res.json(deviceList.map(device => {
+const devicesToApiDevices = devices => {
+  return devices.map(device => {
     return {
       id: device.deviceId,
       alive: device.connectionState === 'Connected'
     }
-  }))
+  })
+}
+const api_devices = (req, res) => {
+  res.json(devicesToApiDevices(deviceList))
 }
 
 const deviceRouter = (devices, router = express.Router()) => {
@@ -21,5 +24,7 @@ const deviceRouter = (devices, router = express.Router()) => {
 
 module.exports = {
   api_devices,
-  deviceRouter
+  deviceRouter,
+  devicesToApiDevices,
+  deviceList
 }

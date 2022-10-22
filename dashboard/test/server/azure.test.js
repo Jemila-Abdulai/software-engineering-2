@@ -22,6 +22,16 @@ describe('azure.js', () => {
       expect(devices).toEqual({ devices: [] })
       clearInterval(interval)
     })
+
+    it('creates an interval with the set interval that calls the registrys list function', async () => {
+      const registry = mockRegistry()
+      const devices = { devices: [] }
+      registry.list = async () => { return { responseBody: devices }}
+      const { interval } = azure.monitorDevices(registry)
+      await sleep(100)
+      expect(devices).toEqual({ devices: [] })
+      clearInterval(interval)
+    })
   })
   
   describe('connect', () => {
