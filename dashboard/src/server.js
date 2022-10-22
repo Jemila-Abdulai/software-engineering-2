@@ -3,6 +3,7 @@ require('dotenv').config()
 
 const path = require('path')
 const express = require('express')
+const iothub = require('azure-iothub')
 
 const routes = require('./server/routes.js')
 const azure = require('./server/azure.js')
@@ -24,17 +25,20 @@ requiredEnvVars.forEach(envVar => {
   }
 })
 
-let devices = [
-  { id: 'my-device1', alive: true },
-  { id: 'my-device2', alive: false }
-]
-let iothubRegistry
+const deviceSource = inProd
+  ? {
+    list: async () => {
+      return {
+        devices: [
+          { id: 'my-device1', alive: true },
+          { id: 'my-device2', alive: false }
+        ]
+      }
+    }
+  }
+  : azure.connect(config.IOT_CONN_STR, iothub)
 
-if (inProd) {
-  devices = []
-  iothubRegistry = azure.connect(config.IOT_CONN_STR)
-  devices = azure.monitorDevices(iothubRegistry).devices
-}
+azure.monitorDevices(deviceSource).devices
 
 // Setup HTTP Server
 const app = express()

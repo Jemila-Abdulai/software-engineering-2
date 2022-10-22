@@ -51,9 +51,23 @@
     "webpack-cli": "^4.9.1"
   },
   "jest": {
+    "rootDir": "./",
     "setupFiles": [
       "<rootDir>/test/jest-setup.js"
     ],
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "'**/*.{js,jsx}",
+      "!**/node_modules/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 0
+      }
+    }
   }
 }
