@@ -26,7 +26,7 @@ jobs:
         run: |
           npm run build
       - name: Build the Docker image
-        run: docker build -t sweng2-coursework:$(date +%s)
+        run: docker build . --tag sweng2-coursework:$(date +%s)
 
       - name: Login to DockerHub
         uses: docker/login-action@v2
