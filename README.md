@@ -23,9 +23,9 @@ This repository is a _monorepo_ containing all the code for Software Engineering
  - A DevOps approach of continuous and iterative delivery will be followed for each phase
 
 ### Bumping the Repo Version and Tagging
-Our process for releasing new versions of the repo is to run the script `util/bump-version.sh`, passing the SemVer part you would like to bump e.g. `./bump-version.sh patch`. You can pass "patch", "minor" or "major". This will create _and PUSH_ the new version to master, be careful please :).
+First, in your new branch, you need to update the version of the repository with `./util/bump-version.sh patch`. `patch` can be `patch`, `minor` or `major`.
 
-This is a manual process for releasing new versions of the repo. When the new tag is pushed, the workflow `.github/workflows/docker.yml` will run and push the new tag to Dockerhub.
+_When your Pull Request is merged_, you should checkout `master` and make sure it is up to date. You can then run `./util/create-tag.sh`. This will push the new version as a tag, the workflow `.github/workflows/docker.yml` will run and push the new tag to Dockerhub.
 
 ### Code Conventions
  - 2 space tabs for python code
