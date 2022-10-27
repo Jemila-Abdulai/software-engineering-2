@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node src/server.js",
     "start:dev": "concurrently \"npx webpack serve\" \"nodemon src/server.js\"",
-    "fetch": "npm install react-fetch",
     "build": "webpack build",
     "test": "npm run lint && jest test",
     "lint:ui": "eslint -c .eslintrc.ui.json --ext jsx src test",
