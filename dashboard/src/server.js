@@ -1,12 +1,16 @@
-// Load environment variables from .env file
-require('dotenv').config()
-
 const path = require('path')
+const fs = require('fs')
+const dotenv = require('dotenv')
 const express = require('express')
 const iothub = require('azure-iothub')
 
 const routes = require('./server/routes.js')
 const azure = require('./server/azure.js')
+
+// Load environment variables from .env file
+const dashboardRoot = path.join(__dirname, '../')
+const envFile = fs.readFileSync(path.join(dashboardRoot, '.env'))
+const envConfig = dotenv.parse(envFile)
 
 const inProd = !process.env.DEV
 
@@ -15,8 +19,8 @@ const requiredEnvVars = [
 ]
 
 const config = {
-  IOT_CONN_STR: process.env.IOTHUB_CONN_STR,
-  PORT: process.env.PORT || 8080
+  IOT_CONN_STR: envConfig.IOT_CONN_STR,
+  PORT: envConfig.PORT || 8080
 }
 
 requiredEnvVars.forEach(envVar => {
