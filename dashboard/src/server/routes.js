@@ -1,12 +1,12 @@
 
 const express = require('express')
 
-let devices = []
+let deviceList = []
 
 const connect = (conn_str, azure_iothub) => azure_iothub.Registry.fromConnectionString(conn_str)
 
 const monitorDevices = (registry, pollTime = 1000) =>
-  setInterval(async () => devices = (await registry.list()).responseBody, pollTime)
+  setInterval(async () => deviceList = (await registry.list()).responseBody, pollTime)
 
 const devicesToApiDevices = devices => {
   return devices.map(device => {
@@ -17,7 +17,7 @@ const devicesToApiDevices = devices => {
   })
 }
 const api_devices = (req, res) => {
-  res.json(devicesToApiDevices(devices))
+  res.json(devicesToApiDevices(deviceList))
 }
 
 const deviceRouter = (sauce, router = express.Router()) => {
