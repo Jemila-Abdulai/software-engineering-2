@@ -6,7 +6,7 @@ on:
 jobs:
   deploydocker:
     env:
-      IMAGE_NAME=samreece/sweng2-coursework
+      IMAGE_NAME: samreece/sweng2-coursework
 
     defaults:
       run:
