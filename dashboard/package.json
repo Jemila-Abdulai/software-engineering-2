@@ -5,7 +5,8 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "start:dev": "concurrently \"npx webpack serve\" \"nodemon src/server.js\"",
+    "start:server:dev": "cross-env DEV=1 nodemon src/server.js",
+    "start:dev": "cross-env DEV=1 concurrently \"npx webpack serve\" \"nodemon src/server.js\"",
     "build": "webpack build",
     "test": "npm run lint && jest test",
     "lint:ui": "eslint -c .eslintrc.ui.json --ext jsx src test",
@@ -18,10 +19,13 @@
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
     "@babel/preset-react": "^7.16.5",
+    "azure-iothub": "^1.15.1",
     "babel": "^6.23.0",
     "babel-loader": "^8.2.3",
     "bootstrap": "^5.2.2",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
+    "dotenv": "^16.0.3",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^8.11.0",
     "eslint-plugin-react": "^7.31.10",
@@ -50,6 +54,24 @@
     "setupFiles": [
       "<rootDir>/test/jest-setup.js"
     ],
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/node_modules/**"
+    ],
+    "coveragePathIgnorePatterns": [
+      "src/index.jsx",
+      "src/server.js"
+    ],
+    "coverageReporters": ["text", "html"],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 0
+      }
+    }
   }
 }
