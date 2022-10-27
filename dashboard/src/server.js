@@ -14,7 +14,7 @@ if (inDev) {
   const envFile = fs.readFileSync(path.join(dashboardRoot, '.env'))
   config = dotenv.parse(envFile)
 } else {
-  config.IOT_CONN_STR =   `${process.env.IOT_HOST_NAME};${process.env.IOT_SHARED_ACCESS_KEY_NAME};${process.env.IOT_SHARED_ACCESS_KEY}`
+  config.IOT_CONN_STR = `HOSTNAME=${process.env.IOT_HOST_NAME};SHARED_ACCESS_KEY_NAME=${process.env.IOT_SHARED_ACCESS_KEY_NAME};SHARED_ACCESS_KEY=${process.env.IOT_SHARED_ACCESS_KEY}`
   config.PORT = process.env.PORT || 8080
 }
 
