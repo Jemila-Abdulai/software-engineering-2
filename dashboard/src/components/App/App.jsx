@@ -30,8 +30,7 @@ export default class App extends React.Component {
                     devices.map(device =>
                         <Card style={{ width: '18rem' }} bg={device.alive ? 'success' : 'danger'} key={device.id}>
                             <Card.Body>
-                                <Card.Title> {device.device_name}</Card.Title>
-                                <Card.Text>ID:{device.id}</Card.Text>
+                                <Card.Text>{device.id}</Card.Text>
                             </Card.Body>
                         </Card>
                     )

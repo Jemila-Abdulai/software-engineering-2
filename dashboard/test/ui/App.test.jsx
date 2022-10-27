@@ -3,7 +3,7 @@ import Enzyme, { mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import Card from 'react-bootstrap/Card'
 
-import App from '../src/components/App/App.jsx'
+import App from '../../src/components/App/App.jsx'
 
 Enzyme.configure({ adapter: new Adapter() })
 
