@@ -30,7 +30,7 @@ jobs:
         run: echo "IMAGE_EXISTS=$(docker manifest inspect $IMAGE_NAME:$VERSION > /dev/null ; echo $?)" >> $GITHUB_ENV
 
       - name: Checking out most recent tag
-        if: ${{ $IMAGE_EXISTS }}
+        if: ${{ env.IMAGE_EXISTS }}
         run: git checkout tags/$VERSION
 
       - name: Install dependencies
