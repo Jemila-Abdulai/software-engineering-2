@@ -2,9 +2,9 @@ name: IOT Dashboard
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 permissions:
   contents: read
@@ -16,7 +16,6 @@ jobs:
         shell: bash
         working-directory: dashboard
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
