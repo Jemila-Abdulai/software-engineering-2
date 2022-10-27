@@ -5,22 +5,28 @@ const express = require('express')
 const iothub = require('azure-iothub')
 
 const routes = require('./server/routes.js')
-const azure = require('./server/azure.js')
-
-// Load environment variables from .env file
-const dashboardRoot = path.join(__dirname, '../')
-const envFile = fs.readFileSync(path.join(dashboardRoot, '.env'))
-const envConfig = dotenv.parse(envFile)
 
 const inProd = !process.env.DEV
+
+let loadedConfig
+if (!inProd) {
+  const dashboardRoot = path.join(__dirname, '../')
+  const envFile = fs.readFileSync(path.join(dashboardRoot, '.env'))
+  loadedConfig = dotenv.parse(envFile)
+} else {
+  loadedConfig = {
+    IOT_CONN_STR: process.env.IOT_CONN_STR,
+    PORT: process.env.PORT || 8080
+  }
+}
 
 const requiredEnvVars = [
   'IOT_CONN_STR'
 ]
 
 const config = {
-  IOT_CONN_STR: envConfig.IOT_CONN_STR,
-  PORT: envConfig.PORT || 8080
+  IOT_CONN_STR: loadedConfig.IOT_CONN_STR,
+  PORT: loadedConfig.PORT || 8080
 }
 
 requiredEnvVars.forEach(envVar => {
@@ -29,20 +35,20 @@ requiredEnvVars.forEach(envVar => {
   }
 })
 
-const deviceSource = inProd
+const deviceSauce = inProd
   ? {
     list: async () => {
       return {
-        devices: [
-          { id: 'my-device1', alive: true },
-          { id: 'my-device2', alive: false }
-        ]
+        responseBody: {
+          devices: [
+            { id: 'my-device1', alive: true },
+            { id: 'my-device2', alive: false }
+          ]
+        }
       }
     }
   }
-  : azure.connect(config.IOT_CONN_STR, iothub)
-
-azure.monitorDevices(deviceSource).devices
+  : routes.connect(config.IOT_CONN_STR, iothub)
 
 // Setup HTTP Server
 const app = express()
@@ -52,7 +58,7 @@ app.use(express.json())
 app.use('/', express.static(path.join(__dirname, '../', '../', 'dist')))
 
 // Serve device routes
-app.use(routes.deviceRouter())
+app.use(routes.deviceRouter(deviceSauce))
 
 app.listen(config.PORT, () => {
   console.log(`Example app listening on port ${config.PORT}`)
