@@ -5,6 +5,9 @@ on:
 
 jobs:
   deploydocker:
+    env:
+      IMAGE_NAME: samreece/sweng2-coursework
+
     defaults:
       run:
         shell: bash
@@ -20,8 +23,15 @@ jobs:
         with:
           python-version: '3.10' 
 
+      - name: Get the version
+        run: echo "VERSION=$(python ../util/what-version-are-we.py)" >> $GITHUB_ENV
+
+      - name: Check we don't already have this version
+        run: echo "IMAGE_EXISTS=$(docker manifest inspect $IMAGE_NAME:$VERSION > /dev/null ; echo $?)" >> $GITHUB_ENV
+
       - name: Checking out most recent tag
-        run: git checkout tags/$(python ../util/what-version-are-we.py)
+        if: ${{ env.IMAGE_EXISTS }}
+        run: git checkout tags/$VERSION
 
       - name: Install dependencies
         run: npm install
@@ -33,5 +43,5 @@ jobs:
         run: npm run build
 
       - name: Build the Docker image
-        run: docker build . --tag samreece/sweng2-coursework:$(python ../util/what-version-are-we.py)
+        run: docker build . --tag $IMAGE_NAME:$VERSION
 
