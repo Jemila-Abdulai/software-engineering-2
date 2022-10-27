@@ -22,6 +22,11 @@ This repository is a _monorepo_ containing all the code for Software Engineering
  - Project will be split up into phases to decide internal deadlines and to allocate tasks
  - A DevOps approach of continuous and iterative delivery will be followed for each phase
 
+### Bumping the Repo Version and Tagging
+Our process for releasing new versions of the repo is to run the script `util/bump-version.sh`, passing the SemVer part you would like to bump e.g. `./bump-version.sh patch`. You can pass "patch", "minor" or "major". This will create _and PUSH_ the new version to master, be careful please :).
+
+This is a manual process for releasing new versions of the repo. When the new tag is pushed, the workflow `.github/workflows/docker.yml` will run and push the new tag to Dockerhub.
+
 ### Code Conventions
  - 2 space tabs for python code
  - Else, follow PEP8 conventions
