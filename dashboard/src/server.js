@@ -5,23 +5,22 @@ const express = require('express')
 const iothub = require('azure-iothub')
 
 const routes = require('./server/routes.js')
-const azure = require('./server/azure.js')
 
-// Load environment variables from .env file
-const dashboardRoot = path.join(__dirname, '../')
-const envFile = fs.readFileSync(path.join(dashboardRoot, '.env'))
-const envConfig = dotenv.parse(envFile)
+const inDev = process.env.DEV
 
-const inProd = !process.env.DEV
+let config = {}
+if (inDev) {
+  const dashboardRoot = path.join(__dirname, '../')
+  const envFile = fs.readFileSync(path.join(dashboardRoot, '.env'))
+  config = dotenv.parse(envFile)
+} else {
+  config.IOT_CONN_STR = process.env.IOT_CONN_STR
+  config.PORT = process.env.PORT || 8080
+}
 
 const requiredEnvVars = [
   'IOT_CONN_STR'
 ]
-
-const config = {
-  IOT_CONN_STR: envConfig.IOT_CONN_STR,
-  PORT: envConfig.PORT || 8080
-}
 
 requiredEnvVars.forEach(envVar => {
   if (config[envVar] === undefined) {
@@ -29,31 +28,54 @@ requiredEnvVars.forEach(envVar => {
   }
 })
 
-const deviceSource = inProd
+const deviceSauce = inDev
   ? {
     list: async () => {
-      return {
-        devices: [
-          { id: 'my-device1', alive: true },
-          { id: 'my-device2', alive: false }
-        ]
-      }
+      return  [
+        {
+          deviceId: "soil-moisture-sensor",
+          generationId: "637993504504538781",
+          etag: "ODgxNjE4MDQx",
+          connectionState: "Disconnected",
+          status: "enabled",
+          statusReason: null,
+          connectionStateUpdatedTime: "2022-10-20T07:45:31.9363936Z",
+          statusUpdatedTime: "0001-01-01T00:00:00Z",
+          lastActivityTime: "2022-10-13T13:58:41.8528977Z",
+          cloudToDeviceMessageCount: 0,
+          capabilities: {
+          },
+          authentication: {
+            symmetricKey: {
+              primaryKey: "Tzx2I5OC3U5weQPVM7ZDskkFYxaqK7Z6VG/8JNumVoY=",
+              secondaryKey: "a++0/406emVj+DVFUBHrrmWcYHjQ/PnzbPiHT5twmJI=",
+            },
+            x509Thumbprint: {
+              primaryThumbprint: null,
+              secondaryThumbprint: null,
+            },
+            type: "sas",
+            SymmetricKey: {
+              primaryKey: "Tzx2I5OC3U5weQPVM7ZDskkFYxaqK7Z6VG/8JNumVoY=",
+              secondaryKey: "a++0/406emVj+DVFUBHrrmWcYHjQ/PnzbPiHT5twmJI=",
+            },
+          },
+        },
+      ]
     }
   }
-  : azure.connect(config.IOT_CONN_STR, iothub)
-
-azure.monitorDevices(deviceSource).devices
+  : routes.connect(config.IOT_CONN_STR, iothub)
 
 // Setup HTTP Server
 const app = express()
 app.use(express.json())
 
 // Serve webpage resources
-app.use('/', express.static(path.join(__dirname, '../', '../', 'dist')))
+app.use('/', express.static(path.join(__dirname, '../', 'dist')))
 
 // Serve device routes
-app.use(routes.deviceRouter())
+app.use(routes.deviceRouter(deviceSauce))
 
 app.listen(config.PORT, () => {
-  console.log(`Example app listening on port ${config.PORT}`)
+  console.log(`Dashboard listening on port ${config.PORT}`)
 })
