@@ -27,6 +27,15 @@ First, in your new branch, you need to update the version of the repository with
 
 _When your Pull Request is merged_, you should checkout `master` and make sure it is up to date. You can then run `./util/create-tag.sh`. This will push the new version as a tag, the workflow `.github/workflows/docker.yml` will run and push the new tag to Dockerhub.
 
+### Rolling back
+For some reason, you have some code that has been merged into master that does not work. To roll it back you do the following
+ - Run `util/rollback.sh <tag>`. This will create a new branch called `rollback-<tag>` and check it out. This branch will be reverted to the tag you passed into `rollback.sh`. (NOTE: Any tags already in master will not be affected by this process)
+ - Commit, push and merge this branch into `master`
+ - If there was a tag created with the rubbish code in it, you will need to delete the tag from `master` with `git push --delete origin <rubbish-tag> && git tag -d <rubbish-tag>`. This will remove the tag from the remote and local
+ - Contact the Dockerhub admin (Sam Reece) and ask them to delete the Docker image tag from Dockerhub
+
+The final two steps are not automatic because you are deleting code and we believe this should be a manual process, not an automatic one. Removing code should be a deliberate action, not an accidental one.
+
 ### Code Conventions
  - 2 space tabs for python code
  - Else, follow PEP8 conventions
