@@ -15,7 +15,4 @@ then
 
   # bump the version
   python -m bumpversion $1 --config-file VERSION.cfg
-  VERSION=$(python util/what-version-are-we.py)
-  git tag -a $VERSION -m "Bump to $VERSION"
-  git push origin $VERSION
 fi
