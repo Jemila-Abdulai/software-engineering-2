@@ -1,4 +1,4 @@
-@echo off
+
 
 set REPO_ROOT=%~dp0..\
 
