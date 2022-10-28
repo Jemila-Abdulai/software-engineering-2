@@ -1,6 +1,6 @@
 on:
   push:
-    branch:
+    branches:
       - 'master'
 
 jobs:
@@ -22,6 +22,7 @@ jobs:
 
     - name: Get the previous repository version
       run: |
+        git fetch
         git checkout master~1
         echo "PREVIOUS_VERSION=$(python ../util/what-version-are-we.py)" >> $GITHUB_ENV
 
