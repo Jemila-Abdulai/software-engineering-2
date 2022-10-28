@@ -29,4 +29,4 @@ jobs:
       if: ${{ env.PREVIOUS_VERSION != env.CURRENT_VERSION }}
       run: |
         git checkout master
-        ./util/create-tag.sh $CURRENT_VERSION
+        ./util/create-tag.sh
