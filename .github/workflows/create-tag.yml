@@ -24,8 +24,9 @@ jobs:
       run: |
         git checkout master~1
         echo "PREVIOUS_VERSION=$(python ../util/what-version-are-we.py)" >> $GITHUB_ENV
-    
+
     - name:
       if: ${{ env.PREVIOUS_VERSION != env.CURRENT_VERSION }}
       run: |
+        git checkout master
         ./util/create-tag.sh $CURRENT_VERSION
