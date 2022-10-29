@@ -142,11 +142,34 @@ cd sensors
 python -m flake8
 ```
 
-### Deployment
+## Deployment on Kubernetes
 
- TODO
+To run the dashboard K8s cluster using last loaded Kubernetes manifest, simply log in to Azure and navigate to the [dashboard-K8s cluster](https://portal.azure.com/#@UniversityofExeterUK.onmicrosoft.com/resource/subscriptions/14a40a2d-7171-4ed1-9cdc-2ab60b4876b3/resourceGroups/azure-software-eng-2-resource-group/providers/Microsoft.ContainerService/managedClusters/dashboard-K8s/overview), and press the `start` button.
 
-Talk about Kubernetes configuration here ...
+Currently, the steps to deploy the latest image to the Kubernetes cluster are manual (you should (*hopefully*) only have to do steps 2-5 once):
+
+1. Log in to Azure and Navigate to the [dashboard-K8s cluster](https://portal.azure.com/#@UniversityofExeterUK.onmicrosoft.com/resource/subscriptions/14a40a2d-7171-4ed1-9cdc-2ab60b4876b3/resourceGroups/azure-software-eng-2-resource-group/providers/Microsoft.ContainerService/managedClusters/dashboard-K8s/overview), and press the `start` button
+2. Open CloudShell (or open your terminal with Azure CLI tools installed)
+3. Check the subscriptions you have access to: `az account list --output table`
+4. Switch to Jemila's subscription (the subscription with id ending in `4876b3`) with the command: `az account set --subscription "<SUB-ID>"`
+5. Get credentials for the dashboard-K8s cluster: `az aks get-credentials --resource-group azure-software-eng-2-resource-group --name dashboard-K8s` 
+6. Run: `kubectl get nodes`, and you should see a list of nodes
+7. **(ONLY IF YOU ARE USING CLOUD SHELL)** - Create/edit the file called `dashboard-manifest.yml` in vi, and copy in the contents of `/kubernetes/dashboard-manifest.yml`
+8. Edit the `dashboard-manifest.yml` file to your needs, ensuring it is pointed to the correct docker image tag on [the docker hub registry](https://hub.docker.com/r/samreece/sweng2-coursework/tags). Save your changes
+9. Apply the manifest file to the Kubernetes cluster: `kubectl apply -f dashboard-manifest.yml`
+10. Check the status of the Kubernetes nodes: `kubectl get pods`. You should see a status of `Running` if all is ok
+11. Check the status of the dashboard service by running the following `kubectl get service dashboard --watch`. Take note of the external IP
+12. Try to hit the dashboard in your browser on port `8080`, using the external IP noted in the previous step
+13. **ONCE FINISHED WITH THE DASHBOARD**, please stop the Kubernetes cluster to save money and stop us going over our budget!
+
+
+### Useful Kubernetes Commands
+
+- `kubectl get pods` -> get the current nodes in the Kubernetes cluster
+- `kubectl logs <pod id>` -> get logs from a specific pod on the cluster
+- `kubectl delete pod <pod id>` -> deletes a pod - useful when updating the manifest. A new pod will automatically be deployed. (Our autoscaling settings are such that between 1 and 2 pods will run at any given time, based on demand)
+- `kubectl apply -f dashboard-manifest.yml` -> applies new manifest to cluster
+- `kubectl get service dashboard --watch` -> watches the dashboard service, giving useful info on external IP etc
 
 ## Docker
 
