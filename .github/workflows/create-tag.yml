@@ -1,0 +1,33 @@
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  tag_new_version:
+    defaults:
+      run:
+        shell: bash
+        working-directory: dashboard
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Get the current repository version
+      run: echo "CURRENT_VERSION=$(python ../util/what-version-are-we.py)" >> $GITHUB_ENV
+
+    - name: Get the previous repository version
+      run: |
+        git fetch
+        git checkout master~1
+        echo "PREVIOUS_VERSION=$(python ../util/what-version-are-we.py)" >> $GITHUB_ENV
+
+    - name:
+      if: ${{ env.PREVIOUS_VERSION != env.CURRENT_VERSION }}
+      run: |
+        git checkout master
+        ./util/create-tag.sh
